@@ -1,0 +1,6 @@
+torch
+transformers
+flask
+pydub
+librosa
+soundfile
