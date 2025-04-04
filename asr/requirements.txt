@@ -1,10 +1,8 @@
+flask
 torch
 transformers
-flask
 pydub
 librosa
 soundfile
 tqdm
 pandas
-elasticsearch
-flask-cors
