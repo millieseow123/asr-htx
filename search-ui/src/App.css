@@ -1,0 +1,8 @@
+.sui-multi-checkbox-facet__input-text, .sui-results-container > div > small  {
+  text-transform: capitalize;
+}
+
+.sui-results-container > div {
+  border-bottom: 1px solid rgb(238, 238, 238);
+  padding: 1rem 0px;
+}

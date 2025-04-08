@@ -14,6 +14,7 @@ es.indices.create(
         "mappings": {
             "properties": {
                 "filename": {"type": "keyword"},
+                "text": {"type": "text"},
                 "generated_text": {"type": "text"},
                 "duration": {"type": "float"},
                 "age": {"type": "keyword"},
@@ -31,6 +32,7 @@ df = pd.read_csv("cv-valid-dev-transcribed.csv")
 for _, row in df.iterrows():
     doc = {
         "filename": row["filename"],
+        "text": None if pd.isna(row["text"]) else row["text"],
         "generated_text": None if pd.isna(row["generated_text"]) else row["generated_text"],
         "duration": None if pd.isna(row.get("duration")) else row.get("duration"),
         "age": None if pd.isna(row.get("age")) else row.get("age"),

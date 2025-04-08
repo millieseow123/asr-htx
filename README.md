@@ -1,3 +1,5 @@
+A searchable audio transcript interface using Wav2Vec2, Elasticsearch, Flask, and React.
+
 ## Project Structure
 
 - `asr/`: ASR microservice with wav2vec2 model
@@ -19,3 +21,51 @@
 ```bash
     curl -F "file=@/path/to/sample.mp3" http://localhost:8001/asr
 ```
+
+## Run Elasticsearch Backend
+1. Navigate to directory
+```bash 
+cd elastic-backend
+```
+
+2. Start Elasticsearch cluster
+```bash
+docker compose up
+```
+Open [http://localhost:9200/_cat/nodes?v](http://localhost:9200/_cat/nodes?v) in your browser — you should see both es01 and es02 nodes listed.
+
+3. Index data
+```bash
+python cv-index.py
+```
+
+4. Start backend
+```bash
+python search_api.py
+```
+
+## Run Frontend (search-ui)
+
+1. Navigate to the frontend directory:
+```bash
+cd search-ui
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start development sever
+```bash
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Limitations
+
+- The ASR model used (`wav2vec2-large-960h`) may produce inaccurate transcriptions, especially for non-US accents or noisy audio, therefore the search function searches both transcribed and actual audio
+- Some metadata fields (e.g., age, gender, accent) may be missing or inconsistent in the source CSV file.
+- The search UI currently does not support fuzzy matching or partial phrase queries.
+- Facets are limited to a fixed number of values (e.g., only top 10 accent types are shown).
+- Backend and search functionality assumes the local Elasticsearch and ASR services are running on ports `9200` and `8001` respectively.
