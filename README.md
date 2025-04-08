@@ -8,16 +8,20 @@ A searchable audio transcript interface using Wav2Vec2, Elasticsearch, Flask, an
 - `search-ui/`: Frontend search interface
 
 ## Run ASR API with Docker
+1. Navigate to directory
+```bash 
+cd asr
+```
 
-1. Build the image:
+2. Build the image:
 ```bash
     docker build -t asr-api ./asr
 ```
-2. Run the container:
+3. Run the container:
 ```bash
     docker run -p 8001:8001 asr-api
 ```
-3. Test the API:
+4. Test the API:
 ```bash
     curl -F "file=@/path/to/sample.mp3" http://localhost:8001/asr
 ```
